@@ -1,0 +1,9 @@
+{
+	"name": "vvdatafactory",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "336be634-4636-4b58-945a-19f90824426b",
+		"tenantId": "25cc0b17-4d49-4f54-bc96-d8b55ae4f441"
+	}
+}

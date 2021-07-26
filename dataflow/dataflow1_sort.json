@@ -1,0 +1,32 @@
+{
+	"name": "dataflow1_sort",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "person_file",
+						"type": "DatasetReference"
+					},
+					"name": "personoutput"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "personoutput",
+						"type": "DatasetReference"
+					},
+					"name": "personsorted"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Sort1"
+				}
+			],
+			"script": "source(output(\n\t\tID as string,\n\t\tName as string,\n\t\tSurname as string,\n\t\tAge as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> personoutput\npersonoutput sort(desc(Surname, true)) ~> Sort1\nSort1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['person_output_sorted.txt'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> personsorted"
+		}
+	}
+}
