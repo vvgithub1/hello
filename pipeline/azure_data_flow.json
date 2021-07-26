@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataflow1_sort",
+				"name": "dataflow1_sort1",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
