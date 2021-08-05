@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 5",
+	"properties": {
+		"content": {
+			"query": "\n\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=cosmosdbvv;Database=AdventureWorks;Key=6CMeZkzV46seW4y4HHkPBt6UZlbGQgxTMfzO5Pl8dOURVai03jTh6saHcd8LbVBvn1ApLlJL4cOehqFX6TZP8w==',\n                OBJECT = 'Sales'\n) AS [Sales]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
