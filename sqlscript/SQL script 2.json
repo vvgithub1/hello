@@ -2,7 +2,7 @@
 	"name": "SQL script 2",
 	"properties": {
 		"content": {
-			"query": "CREATE TABLE [dbo].[People]\n(\n    p_id int NOT NULL, \n    p_name varchar(100), \n    p_surname varchar(100)\n)\nWITH\n(\n    DISTRIBUTION = HASH (p_id),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n\n\nselect * from [dbo].[People]\n\ninsert into dbo.People (p_id, p_name, p_surname) values(1,'Joe', 'Doe') \ninsert into dbo.People values(2,'Peter', 'Pan') GO \ninsert into dbo.People values(3,'Johny', 'Cash') GO\n\ndescribe [dbo].[People]",
+			"query": "CREATE TABLE [dbo].[People]\n(\n    p_id int NOT NULL, \n    p_name varchar(100), \n    p_surname varchar(100)\n)\nWITH\n(\n    DISTRIBUTION = HASH (p_id),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n\n\nselect * from [dbo].[People]\n\ninsert into dbo.People (p_id, p_name, p_surname) values(1,'Joe', 'Doe') \ninsert into dbo.People values(2,'Peter', 'Pan') GO \ninsert into dbo.People values(3,'Johny', 'Cash') GO\n\ndescribe [dbo].[People]\n\n--sssss",
 			"metadata": {
 				"language": "sql"
 			},
