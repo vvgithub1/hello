@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 3",
+	"properties": {
+		"content": {
+			"query": "SELECT *\nFROM sys.tables\nOPTION (LABEL = 'My Query')\n;\n\n-- Find a query with the Label 'My Query'\n-- Use brackets when querying the label column, as it it a key word\nSELECT  *\nFROM    sys.dm_pdw_exec_requests\nWHERE   [label] = 'My Query';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
