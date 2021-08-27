@@ -1,0 +1,13 @@
+{
+	"name": "vvdatabricks",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-6825629740064892.12.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_databricks/providers/Microsoft.Databricks/workspaces/vvdatabricks",
+			"existingClusterId": "0820-074304-miter261"
+		}
+	}
+}
