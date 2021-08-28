@@ -70,10 +70,72 @@
 							"typeProperties": {
 								"notebookPath": "/formula1/presentation/01_create_presentation",
 								"baseParameters": {
-									"p_data_source": {
-										"value": "@variables('v_data_source')",
+									"p_file_date": {
+										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
 										"type": "Expression"
-									},
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "vvdatabricks",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "transform_driver_standings",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "transform_race_results",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/formula1/presentation/02_driver_standings",
+								"baseParameters": {
+									"p_file_date": {
+										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+										"type": "Expression"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "vvdatabricks",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "constructor_standings",
+							"type": "DatabricksNotebook",
+							"dependsOn": [
+								{
+									"activity": "transform_race_results",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/formula1/presentation/03_constructors_standings",
+								"baseParameters": {
 									"p_file_date": {
 										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
 										"type": "Expression"
