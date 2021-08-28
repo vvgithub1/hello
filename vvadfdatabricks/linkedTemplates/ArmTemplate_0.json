@@ -642,7 +642,7 @@
 							"waitOnCompletion": true,
 							"parameters": {
 								"p_window_end_date": {
-									"value": "@pipeline().parameters.p_window_end_date",
+									"value": "@formatDateTime(pipeline().parameters.p_window_end_date,'yyyy-MM-dd')",
 									"type": "Expression"
 								}
 							}
@@ -662,13 +662,13 @@
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
-								"referenceName": "pl_ingest_formula1",
+								"referenceName": "pl_transform_formula1_copy1",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,
 							"parameters": {
 								"p_window_end_date": {
-									"value": "@pipeline().parameters.p_window_end_date",
+									"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
 									"type": "Expression"
 								}
 							}
@@ -684,7 +684,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_ingest_formula1')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_ingest_formula1')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_transform_formula1_copy1')]"
 			]
 		},
 		{
@@ -693,7 +694,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "pl_process_formula1",
