@@ -1,0 +1,27 @@
+{
+	"name": "test_parameter",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "test_parameters_parent",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"p_file_date": "@trigger.startTime"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2021-08-28T20:35:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
