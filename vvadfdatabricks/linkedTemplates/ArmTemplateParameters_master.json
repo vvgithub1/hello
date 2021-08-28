@@ -17,8 +17,8 @@
 		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
-		"test_parameter_properties_test_parameters_parent_parameters_p_file_date": {
-			"value": "@trigger.startTime"
+		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
+			"value": "@trigger().startTime"
 		},
 		"containerUri": {
 			"value": ""

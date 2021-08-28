@@ -23,9 +23,9 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"test_parameter_properties_test_parameters_parent_parameters_p_file_date": {
+		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
-			"defaultValue": "@trigger.startTime"
+			"defaultValue": "@trigger().startTime"
 		}
 	},
 	"variables": {
@@ -808,12 +808,12 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/test_parameter')]",
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -821,7 +821,7 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"p_file_date": "[parameters('test_parameter_properties_test_parameters_parent_parameters_p_file_date')]"
+							"p_file_date": "[parameters('trigger1_properties_test_parameters_parent_parameters_p_file_date')]"
 						}
 					}
 				],
@@ -829,8 +829,8 @@
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Minute",
-						"interval": 3,
-						"startTime": "2021-08-26T20:35:00Z",
+						"interval": 15,
+						"startTime": "2021-08-28T20:53:00Z",
 						"timeZone": "UTC"
 					}
 				}
