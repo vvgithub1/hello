@@ -12,10 +12,21 @@
 						"referenceName": "test_parameters",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"p_file_date": {
+							"value": "@pipeline().parameters.p_file_date",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
+		"parameters": {
+			"p_file_date": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
