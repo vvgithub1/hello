@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
 		},
+		"test_parameter_properties_test_parameters_parent_parameters_p_file_date": {
+			"type": "string",
+			"defaultValue": "@trigger.startTime"
+		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
@@ -767,6 +771,38 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_ingest_formula1')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_transform_formula1_copy1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/test_parameter')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "test_parameters_parent",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"p_file_date": "[parameters('test_parameter_properties_test_parameters_parent_parameters_p_file_date')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 1,
+						"startTime": "2021-08-28T20:35:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/test_parameters_parent')]"
 			]
 		},
 		{
