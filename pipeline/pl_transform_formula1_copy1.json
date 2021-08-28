@@ -30,6 +30,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -71,7 +72,7 @@
 								"notebookPath": "/formula1/presentation/01_create_presentation",
 								"baseParameters": {
 									"p_file_date": {
-										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+										"value": "pipeline().parameters.p_window_end_date",
 										"type": "Expression"
 									}
 								}
@@ -104,7 +105,7 @@
 								"notebookPath": "/formula1/presentation/02_driver_standings",
 								"baseParameters": {
 									"p_file_date": {
-										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+										"value": "pipeline().parameters.p_window_end_date",
 										"type": "Expression"
 									}
 								}
@@ -137,7 +138,7 @@
 								"notebookPath": "/formula1/presentation/03_constructors_standings",
 								"baseParameters": {
 									"p_file_date": {
-										"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
+										"value": "pipeline().parameters.p_window_end_date",
 										"type": "Expression"
 									}
 								}
