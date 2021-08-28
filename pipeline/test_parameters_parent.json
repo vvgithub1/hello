@@ -1,0 +1,21 @@
+{
+	"name": "test_parameters_parent",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Test Paramenters",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "test_parameters",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
