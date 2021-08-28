@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Execute Test Paramenters",
+				"name": "Execute Test Parameters",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
