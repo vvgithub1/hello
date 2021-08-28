@@ -15,7 +15,7 @@
 					"waitOnCompletion": true,
 					"parameters": {
 						"p_file_date": {
-							"value": "@pipeline().parameters.p_file_date",
+							"value": "@formatDateTime(pipeline().parameters.p_file_date,'yyyy-MM-dd')",
 							"type": "Expression"
 						}
 					}
