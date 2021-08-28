@@ -15,7 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/formula1/utils/print_out_variable"
+					"notebookPath": "/formula1/utils/print_out_variable",
+					"baseParameters": {
+						"p_file_date": {
+							"value": "@pipeline().parameters.p_file_date",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "vvdatabricks",
@@ -23,6 +29,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"p_file_date": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
