@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"ls_formula1dl_storage_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'ls_formula1dl_storage'"
-		},
 		"ls_ablob_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_ablob'"
@@ -22,6 +18,14 @@
 		"ls_adls_covidreportingdl_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_adls_covidreportingdl'"
+		},
+		"ls_formula1dl_storage_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_formula1dl_storage'"
+		},
+		"ls_adls_covidreportingdl_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
 		},
 		"ls_formula1dl_storage_properties_typeProperties_url": {
 			"type": "string",
@@ -34,10 +38,6 @@
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
 			"defaultValue": "@trigger().startTime"
-		},
-		"ls_adls_covidreportingdl_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -69,20 +69,20 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
-					"ls_formula1dl_storage_accountKey": {
-						"value": "[parameters('ls_formula1dl_storage_accountKey')]"
-					},
 					"ls_ablob_connectionString": {
 						"value": "[parameters('ls_ablob_connectionString')]"
 					},
 					"ls_adls_covidreportingdl_accountKey": {
 						"value": "[parameters('ls_adls_covidreportingdl_accountKey')]"
 					},
-					"ls_formula1dl_storage_properties_typeProperties_url": {
-						"value": "[parameters('ls_formula1dl_storage_properties_typeProperties_url')]"
+					"ls_formula1dl_storage_accountKey": {
+						"value": "[parameters('ls_formula1dl_storage_accountKey')]"
 					},
 					"ls_adls_covidreportingdl_properties_typeProperties_url": {
 						"value": "[parameters('ls_adls_covidreportingdl_properties_typeProperties_url')]"
+					},
+					"ls_formula1dl_storage_properties_typeProperties_url": {
+						"value": "[parameters('ls_formula1dl_storage_properties_typeProperties_url')]"
 					},
 					"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 						"value": "[parameters('trigger1_properties_test_parameters_parent_parameters_p_file_date')]"
