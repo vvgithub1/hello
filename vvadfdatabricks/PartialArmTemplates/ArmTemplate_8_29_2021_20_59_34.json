@@ -6,38 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "vvadfdatabricks"
-		},
-		"AzureBlobStorage1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
-		},
-		"ls_formula1dl_storage_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'ls_formula1dl_storage'"
-		},
-		"ls_ablob_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_ablob'"
-		},
-		"ls_adls_covidreportingdl_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'ls_adls_covidreportingdl'"
-		},
-		"ls_formula1dl_storage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
-		},
-		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
-			"type": "string",
-			"defaultValue": "@trigger().startTime"
-		},
-		"ls_adls_covidreportingdl_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
 		}
 	},
 	"variables": {
@@ -362,75 +330,7 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_formula1_raw')]",
-				"[concat(variables('factoryId'), '/linkedServices/vvdatabricks')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pl_process_formula1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Execute Ingestion",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_ingest_formula1",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"p_window_end_date": {
-									"value": "@formatDateTime(pipeline().parameters.p_window_end_date,'yyyy-MM-dd')",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Execute Transformation",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "Execute Ingestion",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_transform_formula1_copy1",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"p_window_end_date": {
-									"value": "@formatDateTime(pipeline().parameters.p_window_end_date, 'yyyy-MM-dd')",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"concurrency": 1,
-				"parameters": {
-					"p_window_end_date": {
-						"type": "string"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_ingest_formula1')]",
-				"[concat(variables('factoryId'), '/pipelines/pl_transform_formula1_copy1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pl_transform_formula1_copy1')]",
@@ -602,266 +502,6 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ds_formula1_raw')]",
-				"[concat(variables('factoryId'), '/linkedServices/vvdatabricks')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_formula1_raw')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_formula1dl_storage",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"p_window_end_date": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": {
-							"value": "@formatDateTime(dataset().p_window_end_date,'yyyy-MM-dd')",
-							"type": "Expression"
-						},
-						"fileSystem": "raw"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"constructorId": {
-							"type": "integer"
-						},
-						"constructorRef": {
-							"type": "string"
-						},
-						"name": {
-							"type": "string"
-						},
-						"nationality": {
-							"type": "string"
-						},
-						"url": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_formula1dl_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_formula1dl_storage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('ls_formula1dl_storage_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('ls_formula1dl_storage_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/vvdatabricks')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-6825629740064892.12.azuredatabricks.net",
-					"authentication": "MSI",
-					"workspaceResourceId": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_databricks/providers/Microsoft.Databricks/workspaces/vvdatabricks",
-					"existingClusterId": "0820-074304-miter261"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tr_process_formula1_data')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "pl_process_formula1",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"p_window_end_date": "[parameters('tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 168,
-					"startTime": "2021-03-14T22:00:00Z",
-					"endTime": "2021-04-25T22:00:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_process_formula1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test_parameters')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Notebook1",
-						"type": "DatabricksNotebook",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/formula1/utils/print_out_variable",
-							"baseParameters": {
-								"p_file_date": {
-									"value": "@pipeline().parameters.p_file_date",
-									"type": "Expression"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "vvdatabricks",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"parameters": {
-					"p_file_date": {
-						"type": "string"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/vvdatabricks')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/test_parameters_parent')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Execute Test Parameters",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "test_parameters",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"p_file_date": {
-									"value": "@formatDateTime(pipeline().parameters.p_file_date,'yyyy-MM-dd')",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"parameters": {
-					"p_file_date": {
-						"type": "string"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/test_parameters')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "test_parameters_parent",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"p_file_date": "[parameters('trigger1_properties_test_parameters_parent_parameters_p_file_date')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 1,
-						"startTime": "2021-08-25T21:06:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/test_parameters_parent')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ls_ablob')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('ls_ablob_connectionString')]"
-				}
-			},
 			"dependsOn": []
 		},
 		{
@@ -872,10 +512,10 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('ls_adls_covidreportingdl_properties_typeProperties_url')]",
+					"url": "https://vvstoragelake2.dfs.core.windows.net",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('ls_adls_covidreportingdl_accountKey')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -907,9 +547,7 @@
 				},
 				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_ablob')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_popultion_raw_tsv')]",
