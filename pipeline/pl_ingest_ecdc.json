@@ -120,7 +120,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"fileName": {
-											"value": "@pipeline().parameters.sinkFileName",
+											"value": "@variables('v_sinkFileName')",
 											"type": "Expression"
 										}
 									}
