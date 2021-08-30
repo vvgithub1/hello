@@ -202,6 +202,7 @@
 				}
 			}
 		],
+		"concurrency": 1,
 		"variables": {
 			"v_sourceRelativeURL": {
 				"type": "String"
