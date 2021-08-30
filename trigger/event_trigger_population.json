@@ -3,11 +3,18 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingest_population_data",
+					"type": "PipelineReference"
+				}
+			}
+		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/population/blobs/",
-			"blobPathEndsWith": "/population_by_age.tsv.gz",
+			"blobPathEndsWith": "population_by_age.tsv.gz",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata",
 			"events": [
