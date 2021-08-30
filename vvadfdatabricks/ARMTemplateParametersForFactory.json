@@ -33,7 +33,7 @@
 			"value": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
 		},
 		"ls_covid_source_properties_typeProperties_url": {
-			"value": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data"
+			"value": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data/"
 		}
 	}
 }

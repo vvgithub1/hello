@@ -45,7 +45,7 @@
 		},
 		"ls_covid_source_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data"
+			"defaultValue": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data/"
 		}
 	},
 	"variables": {
@@ -1192,7 +1192,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation",
-						"relativeUrl": "/cases_deaths.csv"
+						"relativeUrl": "cases_deaths.csv"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

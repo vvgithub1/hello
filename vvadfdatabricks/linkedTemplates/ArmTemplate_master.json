@@ -45,7 +45,7 @@
 		},
 		"ls_covid_source_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data"
+			"defaultValue": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data/"
 		},
 		"containerUri": {
 			"type": "string",
