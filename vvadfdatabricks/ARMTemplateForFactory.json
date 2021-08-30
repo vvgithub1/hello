@@ -45,7 +45,7 @@
 		},
 		"ls_covid_source_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com"
+			"defaultValue": "@{linkedService().sourceBaseURL}"
 		}
 	},
 	"variables": {
@@ -1168,6 +1168,11 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"sourceBaseURL": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "HttpServer",
 				"typeProperties": {
@@ -1185,10 +1190,19 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "ls_covid_source",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"sourceBaseURL": {
+							"value": "@dataset().baseURL",
+							"type": "Expression"
+						}
+					}
 				},
 				"parameters": {
 					"relativeURL": {
+						"type": "string"
+					},
+					"baseURL": {
 						"type": "string"
 					}
 				},
@@ -1401,6 +1415,10 @@
 											"parameters": {
 												"relativeURL": {
 													"value": "@variables('v_sourceRelativeURL')",
+													"type": "Expression"
+												},
+												"baseURL": {
+													"value": "@variables('v_baseURL')",
 													"type": "Expression"
 												}
 											}
