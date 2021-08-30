@@ -9,7 +9,7 @@
 		},
 		"trigger2_properties_pl_ingest_ecdc_parameters_sourceRelativeURL": {
 			"type": "string",
-			"defaultValue": "github.com/cloudboxacademy/covid19/raw/main/ecdc_data/cases_deaths.csv"
+			"defaultValue": "cloudboxacademy/covid19/raw/main/ecdc_data/cases_deaths.csv"
 		},
 		"trigger2_properties_pl_ingest_ecdc_parameters_sinkFileName": {
 			"type": "string",
