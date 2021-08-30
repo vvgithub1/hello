@@ -34,6 +34,12 @@
 		},
 		"ls_covid_source_properties_typeProperties_url": {
 			"value": "https://github.com"
+		},
+		"trigger2_properties_pl_ingest_ecdc_parameters_sourceRelativeURL": {
+			"value": "github.com/cloudboxacademy/covid19/raw/main/ecdc_data/cases_deaths.csv"
+		},
+		"trigger2_properties_pl_ingest_ecdc_parameters_sinkFileName": {
+			"value": "cases_deaths.csv"
 		}
 	}
 }
