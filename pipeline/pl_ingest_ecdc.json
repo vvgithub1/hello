@@ -110,6 +110,10 @@
 										"relativeURL": {
 											"value": "@variables('v_sourceRelativeURL')",
 											"type": "Expression"
+										},
+										"baseURL": {
+											"value": "@variables('v_baseURL')",
+											"type": "Expression"
 										}
 									}
 								}
