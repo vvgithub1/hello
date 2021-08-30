@@ -175,7 +175,7 @@
 							"typeProperties": {
 								"variableName": "v_baseURL",
 								"value": {
-									"value": "@item().v_BaseURL",
+									"value": "@item().sourceBaseURL",
 									"type": "Expression"
 								}
 							}
