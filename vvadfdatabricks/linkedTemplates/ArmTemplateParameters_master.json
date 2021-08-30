@@ -20,20 +20,20 @@
 		"ls_adls_covidreportingdl_properties_typeProperties_url": {
 			"value": "https://vvstoragelake2.dfs.core.windows.net"
 		},
+		"ls_covid_source_properties_typeProperties_url": {
+			"value": "@{linkedService().sourceBaseURL}"
+		},
 		"ls_formula1dl_storage_properties_typeProperties_url": {
 			"value": "https://vvstoragelake2.dfs.core.windows.net"
+		},
+		"event_trigger_population_properties_typeProperties_scope": {
+			"value": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
 		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"value": "@trigger().startTime"
-		},
-		"event_trigger_population_properties_typeProperties_scope": {
-			"value": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
-		},
-		"ls_covid_source_properties_typeProperties_url": {
-			"value": "@{linkedService().sourceBaseURL}"
 		},
 		"containerUri": {
 			"value": ""
