@@ -1,0 +1,22 @@
+{
+	"name": "ds_cases_deaths",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_covid_source",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "cases_deaths.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
