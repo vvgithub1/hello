@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"fileName": {
-				"type": "string",
-				"defaultValue": "cases_deaths.csv"
+				"type": "string"
 			}
 		},
 		"annotations": [],
