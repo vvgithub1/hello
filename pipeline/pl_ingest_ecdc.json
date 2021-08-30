@@ -164,14 +164,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"sourceRelativeURL": {
-				"type": "string"
-			},
-			"sinkFileName": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"v_sourceRelativeURL": {
 				"type": "String"
