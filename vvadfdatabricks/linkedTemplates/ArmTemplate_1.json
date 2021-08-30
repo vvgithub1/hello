@@ -7,13 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "vvadfdatabricks"
 		},
-		"trigger2_properties_pl_ingest_ecdc_parameters_sourceRelativeURL": {
+		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
-			"defaultValue": "cloudboxacademy/covid19/raw/main/ecdc_data/cases_deaths.csv"
+			"defaultValue": "@trigger().startTime"
 		},
-		"trigger2_properties_pl_ingest_ecdc_parameters_sinkFileName": {
+		"event_trigger_population_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "cases_deaths.csv"
+			"defaultValue": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
 		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
 			"type": "string",
@@ -24,6 +24,65 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "test_parameters_parent",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"p_file_date": "[parameters('trigger1_properties_test_parameters_parent_parameters_p_file_date')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 1,
+						"startTime": "2021-08-25T21:06:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/event_trigger_population')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_ingest_population_data",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/population/blobs/",
+					"blobPathEndsWith": "population_by_age.tsv.gz",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('event_trigger_population_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger2')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
@@ -37,10 +96,7 @@
 							"referenceName": "pl_ingest_ecdc",
 							"type": "PipelineReference"
 						},
-						"parameters": {
-							"sourceRelativeURL": "[parameters('trigger2_properties_pl_ingest_ecdc_parameters_sourceRelativeURL')]",
-							"sinkFileName": "[parameters('trigger2_properties_pl_ingest_ecdc_parameters_sinkFileName')]"
-						}
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
