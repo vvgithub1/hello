@@ -159,6 +159,12 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "base url",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}
@@ -169,6 +175,9 @@
 				"type": "String"
 			},
 			"v_sinkFileName": {
+				"type": "String"
+			},
+			"v_baseURL": {
 				"type": "String"
 			}
 		},
