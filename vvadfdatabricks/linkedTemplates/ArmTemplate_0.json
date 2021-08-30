@@ -33,7 +33,7 @@
 		},
 		"ls_covid_source_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://github.com/cloudboxacademy/covid19/tree/main/ecdc_data/"
+			"defaultValue": "https://github.com"
 		},
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
@@ -307,7 +307,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation",
-						"relativeUrl": "cases_deaths.csv"
+						"relativeUrl": "cloudboxacademy/covid19/tree/main/ecdc_data/cases_deaths.csv"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
