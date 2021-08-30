@@ -46,11 +46,22 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup1')",
+						"type": "Expression"
+					},
 					"activities": [
 						{
 							"name": "copy ecdc http data",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "relative url",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -97,7 +108,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"relativeURL": {
-											"value": "@pipeline().parameters.sourceRelativeURL",
+											"value": "@variables('v_sourceRelativeURL')",
 											"type": "Expression"
 										}
 									}
@@ -115,6 +126,39 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "relative url",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "file name",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_sourceRelativeURL",
+								"value": {
+									"value": "@item().sourceRelativeURL",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "file name",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_sinkFileName",
+								"value": {
+									"value": "@item().sinkFileName",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
