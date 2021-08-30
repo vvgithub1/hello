@@ -150,7 +150,14 @@
 						{
 							"name": "file name",
 							"type": "SetVariable",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "base url",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "v_sinkFileName",
@@ -164,7 +171,14 @@
 							"name": "base url",
 							"type": "SetVariable",
 							"dependsOn": [],
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_baseURL",
+								"value": {
+									"value": "@item().v_BaseURL",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
