@@ -28,6 +28,9 @@
 		},
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"value": "@trigger().startTime"
+		},
+		"event_trigger_population_properties_typeProperties_scope": {
+			"value": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
 		}
 	}
 }

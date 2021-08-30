@@ -35,6 +35,10 @@
 			"type": "string",
 			"defaultValue": "@trigger().startTime"
 		},
+		"event_trigger_population_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/8292c435-c459-400b-bb35-7762e5d549d6/resourceGroups/rg_storage/providers/Microsoft.Storage/storageAccounts/vvstoragedata"
+		},
 		"tr_process_formula1_data_properties_pipeline_parameters_p_window_end_date": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
@@ -1088,6 +1092,37 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/test_parameters_parent')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/event_trigger_population')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_ingest_population_data",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/population/blobs/",
+					"blobPathEndsWith": "population_by_age.tsv.gz",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('event_trigger_population_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_ingest_population_data')]"
 			]
 		},
 		{
