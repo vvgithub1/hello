@@ -1,5 +1,5 @@
 {
-	"name": "ds_hospital_admissions",
+	"name": "ds_raw_hospital_admissions",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adls_covidreportingdl",
@@ -16,6 +16,7 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
