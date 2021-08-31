@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "hospitals",
+				"name": "df_transform_hospitals",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
