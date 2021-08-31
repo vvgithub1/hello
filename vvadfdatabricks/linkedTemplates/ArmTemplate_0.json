@@ -737,7 +737,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "ecdc/hospital_adm",
+						"folderPath": "ecdc/hospital_adm_weekly",
 						"fileSystem": "processed"
 					},
 					"columnDelimiter": ",",
