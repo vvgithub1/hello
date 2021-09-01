@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_formula1dl_storage'"
 		},
+		"ls_hdi_covid_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_hdi_covid'"
+		},
 		"ls_adls_covidreportingdl_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
@@ -46,6 +50,10 @@
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
 			"defaultValue": "@trigger().startTime"
+		},
+		"ls_hdi_covid_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		}
 	},
 	"variables": {
@@ -2258,6 +2266,69 @@
 				"[concat(variables('factoryId'), '/datasets/ds_dim_date')]",
 				"[concat(variables('factoryId'), '/datasets/df_transform_hospital_adm_weekly')]",
 				"[concat(variables('factoryId'), '/datasets/ds_hospital_adm_daily')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_process_testing_hive')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Hive1",
+						"type": "HDInsightHive",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"scriptPath": "scripts/hql/covid_transform_testing.hql",
+							"scriptLinkedService": {
+								"referenceName": "ls_ablob",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_hdi_covid",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_hdi_covid')]",
+				"[concat(variables('factoryId'), '/linkedServices/ls_ablob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_hdi_covid')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HDInsight",
+				"typeProperties": {
+					"clusterUri": "https://vvhdinsightcluster.azurehdinsight.net",
+					"userName": "[parameters('ls_hdi_covid_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_hdi_covid_password')]"
+					},
+					"isEspEnabled": false,
+					"linkedServiceName": {
+						"referenceName": "ls_ablob",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_ablob')]"
 			]
 		}
 	]

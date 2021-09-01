@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ls_formula1dl_storage'"
 		},
+		"ls_hdi_covid_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_hdi_covid'"
+		},
 		"ls_adls_covidreportingdl_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://vvstoragelake2.dfs.core.windows.net"
@@ -46,6 +50,10 @@
 		"trigger1_properties_test_parameters_parent_parameters_p_file_date": {
 			"type": "string",
 			"defaultValue": "@trigger().startTime"
+		},
+		"ls_hdi_covid_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		},
 		"containerUri": {
 			"type": "string",
@@ -112,6 +120,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"ls_hdi_covid_password": {
+						"value": "[parameters('ls_hdi_covid_password')]"
+					},
+					"ls_hdi_covid_properties_typeProperties_userName": {
+						"value": "[parameters('ls_hdi_covid_properties_typeProperties_userName')]"
 					},
 					"event_trigger_population_properties_typeProperties_scope": {
 						"value": "[parameters('event_trigger_population_properties_typeProperties_scope')]"
